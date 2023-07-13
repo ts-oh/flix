@@ -9,7 +9,7 @@ module MoviesHelper
   end
 
   def description(movie)
-    truncate(movie.description, length: 40, seperator: ' ')
+    truncate(movie.description, length: 150, seperator: ' ')
   end
 
   def release_year(movie)

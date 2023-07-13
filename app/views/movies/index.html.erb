@@ -1,15 +1,15 @@
-<ul>
-  <% @movie_list.each do |movie| %>
-    <li>
-      <strong><%= movie.title %></strong>
-      (<%= movie.rating %>):
-      <%= performance(movie) %>
-    </li>
-    <p>
-        Description: <%= description(movie) %>
-    </p>
-    <p>
-        Released Date: <%= release_year(movie) %>
-    </p>
-  <% end %>
-</ul>
+<% @movie_list.each do |movie| %>
+  <section class="movie">
+    <div class="summary">
+      <h2>
+        <%= movie.title %>
+      </h2>
+      <h3>
+        <%= performance(movie) %>
+      </h3>
+      <p>
+        <%= description(movie) %>
+      </p>
+    </div>
+  </section>
+<% end %>
