@@ -2,8 +2,11 @@
   <section class="movie">
     <div class="summary">
       <h2>
-        <%= movie.title %>
+        <%= link_to(movie.title, movie_path(movie)) %>
       </h2>
+      <h3>
+      <%= release_year(movie)%>
+      </h3>
       <h3>
         <%= performance(movie) %>
       </h3>
@@ -13,3 +16,7 @@
     </div>
   </section>
 <% end %>
+
+<section class="admin">
+  <%= link_to "Add New Movie", new_movie_path, class: "button" %>
+</section>
