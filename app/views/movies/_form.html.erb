@@ -3,7 +3,7 @@
   <%= form.text_field :title, autofocus: true %>
 
   <%= form.label :rating %>
-  <%= form.text_field :rating %>
+  <%= form.select :rating, Movie::RATINGS, prompt: "Pick one" %>
 
   <%= form.label :description %>
   <%= form.text_area :description, rows: 10%>
