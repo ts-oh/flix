@@ -1,4 +1,7 @@
 <%= form_with(model: movie) do |form|%>
+
+  <%= render "shared/errors", object: movie %>
+
   <%= form.label :title %>
   <%= form.text_field :title, autofocus: true %>
 
