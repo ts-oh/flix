@@ -1,8 +1,7 @@
 module MoviesHelper
-
   def performance(movie)
     if movie.flop?
-      "Flop!"
+      'Flop!'
     else
       number_to_currency(movie.total_gross, precision: 0)
     end
@@ -15,5 +14,4 @@ module MoviesHelper
   def release_year(movie)
     movie.released_on.year
   end
-
 end
