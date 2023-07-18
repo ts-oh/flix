@@ -7,6 +7,9 @@
     <h2>
       <%= release_year(@movie) %> &bull; <%= @movie.rating %>
     </h2>
+    <div class="reviews">
+      <%= link_to pluralize(@movie.reviews.count, "review"), movie_reviews_path(@movie)%>
+    </div>
     <table>
       <tr>
         <th>Director:</th>
