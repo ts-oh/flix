@@ -28,8 +28,12 @@
         <td><%= @movie.description %></td>
       </tr>
     </table>
+  <%= link_to "Write Review", new_movie_review_path(@movie), class: "review" %>
   </div>
 </section>
+
+
+
 
 <section class="admin">
   <%= link_to("Edit", edit_movie_path(@movie), class: "button") %>
