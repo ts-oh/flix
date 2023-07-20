@@ -11,7 +11,10 @@
       <%= release_year(movie)%>
       </h3>
       <h3>
-        <%= performance(movie) %>
+        <%= total_gross(movie) %>
+      </h3>
+      <h3 class="stars">
+        <%= render "shared/stars", percent: movie.average_stars_as_percent%>
       </h3>
       <p>
         <%= description(movie) %>
