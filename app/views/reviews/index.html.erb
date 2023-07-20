@@ -10,6 +10,8 @@
       <p>
         <%= review.comment %>
       </p>
+      <%= link_to "Edit", edit_movie_review_path(@movie, review) , class: "button" %>
+      <%= link_to "Delete", movie_review_path(@movie, review), class: "button", data: { turbo_method: :delete, turbo_confirm: "Really? "} %>
     </li>
   <% end %>
 </ul>

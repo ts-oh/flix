@@ -21,6 +21,25 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = @movie.reviews.find_by(id: params[:id])
+  end
+
+  def update
+    @review = @movie.reviews.find_by(id: params[:id])
+    if @review.update(review_params)
+      redirect_to movie_reviews_url(@movie), notice: "Review updated successfully"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @review = @movie.reviews.find_by(id: params[:id])
+    @review.destroy
+    redirect_to movie_reviews_url(@review), status: :see_other, alert: "Review succesfully deleted"
+  end
+
   private
 
   def review_params

@@ -1,4 +1,4 @@
-<h1>Write review for <%= link_to @movie.title, @movie %></h1>
+<h1>Write review for <%= @movie.title %></h1>
 <%= form_with(model: [@movie, @review]) do |f| %>
   <%= render "shared/errors", object: @review %>
   <%= f.label :name %>
