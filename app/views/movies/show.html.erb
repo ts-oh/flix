@@ -7,6 +7,9 @@
     <h2>
       <%= release_year(@movie) %> &bull; <%= @movie.rating %>
     </h2>
+    <div class="reviews">
+      <%= link_to pluralize(@movie.reviews.count, "review"), movie_reviews_path(@movie)%>
+    </div>
     <table>
       <tr>
         <th>Director:</th>
@@ -31,4 +34,8 @@
 <section class="admin">
   <%= link_to("Edit", edit_movie_path(@movie), class: "button") %>
   <%= link_to "Delete", @movie, class: "button", data: { turbo_method: :delete, turbo_confirm: "Really?" } %>
+</section>
+
+<section>
+  <%= render "reviews/new" %>
 </section>

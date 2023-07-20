@@ -1,5 +1,7 @@
 class Movie < ApplicationRecord
 
+  has_many :reviews, dependent: :destroy
+
   RATINGS = %w(G PG PG-13 R NC-17)
 
   validates :title, :released_on, :duration, presence: true
