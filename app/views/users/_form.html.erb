@@ -5,6 +5,9 @@
   <%= form.label :name %>
   <%= form.text_field :name, autofocus: true %>
 
+  <%= form.label :username %>
+  <%= form.text_field :username, placeholder: "Alphanumeric characters only!" %>
+
   <%= form.label :email %>
   <%= form.email_field :email %>
 
@@ -14,5 +17,10 @@
   <%= form.label :password_confirmation, "Confirm Password"%>
   <%= form.password_field :password_confirmation%>
 
-  <%= form.submit %>
+  <% if user.new_record?%>
+    <%= form.submit "Create Account" %>
+  <% else %>
+    <%= form.submit "Update Account" %>
+  <% end %>
+
 <% end %>
