@@ -1,5 +1,4 @@
 class Movie < ApplicationRecord
-
   has_many :reviews, dependent: :destroy
 
   RATINGS = %w(G PG PG-13 R NC-17)
@@ -11,14 +10,14 @@ class Movie < ApplicationRecord
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
 
   validates :image_file_name, format: {
-      with: /\w+\.(jpg|png)\z/i,
-      message: "must be a JPG or PNG image"
-  }
+                      with: /\w+\.(jpg|png)\z/i,
+                      message: "must be a JPG or PNG image",
+                    }
 
   validates :rating, inclusion: { in: RATINGS }
 
   def self.released
-    where('released_on < ?', Time.now).order('released_on desc')
+    where("released_on < ?", Time.now).order("released_on desc")
   end
 
   def flop?
@@ -34,5 +33,4 @@ class Movie < ApplicationRecord
   def average_stars_as_percent
     (self.average_stars / 5.0) * 100
   end
-
 end
