@@ -1,6 +1,14 @@
 <section class="movie-details">
   <div class="image">
     <%= image_tag @movie.image_file_name %>
+    <% if current_user %>
+      <div class="faves">
+        <%= fave_or_unfave_button(@movie, @favorite) %>
+        <div class="count">
+          <%= @fans.size %>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="details">
     <h1><%= @movie.title %></h1>
@@ -29,7 +37,22 @@
         <td><%= @movie.description %></td>
       </tr>
     </table>
+    <div class="review">
+      <%= render "reviews/new" %>
+    </div>
   </div>
+  <aside>
+    <% if @fans.present? %>
+      <h4>Fans</h4>
+      <ul>
+        <% @fans.each do |user| %>
+          <li>
+            <%= link_to user.name, user %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </aside>
 </section>
 <% if current_user_admin? %>
   <section class="admin">
@@ -37,7 +60,3 @@
     <%= link_to "Delete", @movie, class: "button", data: { turbo_method: :delete, turbo_confirm: "Really?" } %>
   </section>
 <% end %>
-
-<section>
-  <%= render "reviews/new" %>
-</section>
