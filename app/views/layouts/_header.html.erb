@@ -1,30 +1,30 @@
 <header>
   <nav>
-  <%= link_to(image_tag("logo.png"), root_path) %>
+    <%= link_to(image_tag("logo.png"), root_path) %>
     <ul class="left">
       <li>
         <%= link_to("All Movies", movies_path)%>
       </li>
     </ul>
     <ul class="right">
-    <% if current_user %>
-      <li>
-        <%= link_to "Account Settings", edit_user_path(current_user) %>
-      </li>
-      <li>
-        <%= link_to current_user.name, current_user %>
-      </li>
-      <li>
-        <%= link_to "Sign Out", session_path(current_user), data: { turbo_method: :delete }, class: "button" %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Sign in", signin_path, class:"button" %>
-      </li>
-      <li>
-        <%= link_to "Sign up", signup_path, class: "button" %>
-      </li>
-    <% end %>
+      <% if current_user %>
+        <li>
+          <%= link_to "Account Settings", edit_user_path(current_user) %>
+        </li>
+        <li>
+          <%= link_to current_user.name, current_user %>
+        </li>
+        <li>
+          <%= link_to "Sign Out", session_path(current_user), data: { turbo_method: :delete }, class: "button" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Sign in", signin_path, class:"button" %>
+        </li>
+        <li>
+          <%= link_to "Sign up", signup_path, class: "button" %>
+        </li>
+      <% end %>
     </ul>
   </nav>
 </header>
