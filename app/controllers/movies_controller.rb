@@ -3,7 +3,18 @@ class MoviesController < ApplicationController
   before_action :require_admin, except: %i[index show]
 
   def index
-    @movie_list = Movie.released
+    @movies = case params[:filter]
+              when 'upcoming'
+                Movie.upcoming
+              when 'recent'
+                Movie.recent
+              when 'hits'
+                Movie.hits
+              when 'flops'
+                Movie.flops
+              else
+                Movie.released
+              end
   end
 
   def show
@@ -59,3 +70,30 @@ class MoviesController < ApplicationController
                                   :image_file_name, genre_ids: [])
   end
 end
+
+=begin
+Dynamic way using ruby send
+
+  def index
+    @movies = Movie.send(movies_filter)
+  end
+
+  private
+  def movies_filter
+    if params[:filter].in? %w(upcoming recent hits flops)
+      params[:filter]
+    else
+      :released
+    end
+  end
+
+But do not do this below!
+
+  def index
+    if params[:filter]
+      @movies = Movie.send(params[:filter])
+    else
+      @movies = Movie.released
+    end
+  end
+=end
