@@ -1,4 +1,4 @@
-<% @movie_list.each do |movie| %>
+<% @movies.each do |movie| %>
   <section class="movie">
     <div class="image">
       <%= image_tag movie.image_file_name%>
@@ -8,7 +8,7 @@
         <%= link_to(movie.title, movie_path(movie)) %>
       </h2>
       <h3>
-      <%= release_year(movie)%>
+        <%= release_year(movie)%>
       </h3>
       <h3>
         <%= total_gross(movie) %>
