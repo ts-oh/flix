@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_signin, except: %i[new create]
-  before_action :require_correct_user, only: %i[edit update]
+  before_action :require_correct_user, only: %i[show edit update destroy]
   before_action :require_admin, only: [:destroy]
 
   def index
@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @reviews = @user.reviews
     @favorite_movies = @user.favorite_movies
   end
@@ -38,7 +37,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to root_url, status: :see_other, alert: 'Account succesfully deleted!'
   end
@@ -47,11 +45,12 @@ class UsersController < ApplicationController
 
   # this will run before above actions hence we can delete @user = User.find from actions related to require_correct_user
   def require_correct_user
-    @user = User.find(params[:id])
+    @user = User.find_by!(username: params[:id])
     redirect_to root_url, status: :see_other unless current_user?(@user)
   end
 
   def user_params
     params.require(:user).permit(:name, :username, :email, :password, :pasword_confirmation)
   end
+
 end

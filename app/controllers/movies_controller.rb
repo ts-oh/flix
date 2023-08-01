@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   before_action :require_signin, except: %i[index show]
   before_action :require_admin, except: %i[index show]
+  before_action :set_movie, only: %i[show edit update destroy]
 
   def index
     @movies = case params[:filter]
@@ -18,7 +19,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by!(slug: params[:id])
     @review = @movie.reviews.new
     @fans = @movie.fans
     @genres = @movie.genres.order(:name)
@@ -65,35 +66,37 @@ class MoviesController < ApplicationController
 
   private
 
+  def set_movie
+    @movie = Movie.find_by!(slug: params[:id])
+  end
+
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :total_gross, :released_on, :director, :duration,
                                   :image_file_name, genre_ids: [])
   end
 end
 
-=begin
-Dynamic way using ruby send
-
-  def index
-    @movies = Movie.send(movies_filter)
-  end
-
-  private
-  def movies_filter
-    if params[:filter].in? %w(upcoming recent hits flops)
-      params[:filter]
-    else
-      :released
-    end
-  end
-
-But do not do this below!
-
-  def index
-    if params[:filter]
-      @movies = Movie.send(params[:filter])
-    else
-      @movies = Movie.released
-    end
-  end
-=end
+# Dynamic way using ruby send
+#
+#   def index
+#     @movies = Movie.send(movies_filter)
+#   end
+#
+#   private
+#   def movies_filter
+#     if params[:filter].in? %w(upcoming recent hits flops)
+#       params[:filter]
+#     else
+#       :released
+#     end
+#   end
+#
+# But do not do this below!
+#
+#   def index
+#     if params[:filter]
+#       @movies = Movie.send(params[:filter])
+#     else
+#       @movies = Movie.released
+#     end
+#   end

@@ -57,7 +57,7 @@
       <ul>
         <% @genres.each do |genre| %>
           <li>
-            <%= genre.name %>
+            <%= link_to genre.name, genre_path(genre) %>
           <% end %>
         </li>
       </ul>

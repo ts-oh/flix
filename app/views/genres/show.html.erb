@@ -1,0 +1,12 @@
+<h2>
+  <%= @genre.name %>
+</h2>
+<div class="movie">
+  <% @genre.movies.each do |m| %>
+    <ul>
+      <li>
+        <%= link_to m.title, movie_path(m)  %>
+      </li>
+    </ul>
+  <% end %>
+</div>
